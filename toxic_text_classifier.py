@@ -200,22 +200,24 @@ def classifier_with_keras():
 #-------------------------------------------------------------------------------------------------------
 def load_keras_and_predict():
 	model_loaded = load_model(input("load keras model (file path): ")+'.h5')
-	#x_to_predict=input("input comment to predict:")
-	#x_to_predict=[x_to_predict]
-	#max_features = 20000
-	#tokenizer = Tokenizer(num_words=max_features)
-	#tokenizer.fit_on_texts(list(x_to_predict))
-	#tokenized_x_to_predict = tokenizer.texts_to_sequences(x_to_predict)
-	#maxlen = 200
-	#x_tokenized= pad_sequences(tokenized_x_to_predict, maxlen=maxlen)
-	#predicition=model_loaded.predict_classes(x_tokenized)
-	test_data = pd.read_csv('data/test.csv').fillna(' ')
-	class_names = ['toxic', 'severe_toxic', 'obscene', 'threat', 'insult', 'identity_hate']
-	X_test_start=test_data["comment_text"].values
-	X_test=toknizing(X_test_start)
-	new_pred=model_loaded.predict(X_test)
-	print(new_pred)
-	return(new_pred)
+	x_to_predict=input("input comment to predict:")
+	x_to_predict=[x_to_predict]
+	x_to_predict=x_to_predict.values
+	max_features = 20000
+	tokenizer = Tokenizer(num_words=max_features)
+	tokenizer.fit_on_texts(list(x_to_predict))
+	tokenized_x_to_predict = tokenizer.texts_to_sequences(x_to_predict)
+	maxlen = 200
+	x_tokenized= pad_sequences(tokenized_x_to_predict, maxlen=maxlen)
+	predicition=model_loaded.predict_classes(x_tokenized)
+	return(pred)
+	#test_data = pd.read_csv('data/test.csv').fillna(' ')
+	#class_names = ['toxic', 'severe_toxic', 'obscene', 'threat', 'insult', 'identity_hate']
+	#X_test_start=test_data["comment_text"].values
+	#X_test=toknizing(X_test_start)
+	#new_pred=model_loaded.predict(X_test)
+	#print(new_pred)
+	#return(new_pred)
 #--------------------------------------------------------------------------------------------------------
 while True:
 	what_to_do=int(input("what you want to do (choose 1,2,3,4,5) : "))
